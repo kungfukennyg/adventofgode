@@ -1,0 +1,68 @@
+#!/bin/bash
+set -ex
+
+session="${AOC_SESSION_TOKEN}"
+if [[ -z "${session}" ]];
+then
+  echo "$AOC_SESSION_TOKEN must be set. Get a token from authenticating at https://adventofcode.com"
+  exit 1
+fi
+
+# year and specific day to setup
+year=$1
+day=$2
+input_flag=$3
+if [[ -z "${day}" ]] || [[ -z "${year}" ]];
+then
+  echo "Usage: ./setup-problem <year> <day>"
+  exit 2
+fi
+
+# validate problem actually exists
+url="https://adventofcode.com/${year}/day/${day}"
+curl -I --fail-with-body "${url}"
+
+if [[ "${input_flag}" = "--input" ]];
+then
+  file="${year}/day${day}/input.txt"
+  if [ -f "${file}" ];
+  then
+    echo "${file} already exists."
+    exit 65
+  fi
+
+  curl --cookie "session=${session}" "${url}/input" >> "${file}"
+  exit 0
+fi
+
+# setup year and day dirs
+if [[ ! -d "${year}" ]];
+then
+  mkdir "${year}" && cd "$_" || exit 3
+  go mod init "example.com/adventofgode-${year}"
+else
+ cd "${year}"
+fi
+
+mkdir "day${day}"
+cd "$_"
+
+# basic go files
+cat << EOF > main.go
+package day${day}
+
+EOF
+cat << EOF > main_test.go
+package day${day}
+
+EOF
+
+# tool for parsing problem text pages
+parser="pandoc"
+if ! brew list "${parser}" &>/dev/null; 
+then
+  brew install "${parser}"
+fi
+
+# get problem part 1 text
+curl --cookie "session=${session}" "${url}" | pandoc -f html -t markdown >> problem_part_one.md
