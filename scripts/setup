@@ -1,10 +1,10 @@
 #!/bin/bash
-set -ex
+set -e
 
 session="${AOC_SESSION_TOKEN}"
 if [[ -z "${session}" ]];
 then
-  echo "$AOC_SESSION_TOKEN must be set. Get a token from authenticating at https://adventofcode.com"
+  echo "aoc: $AOC_SESSION_TOKEN must be set. Get a token from authenticating at https://adventofcode.com"
   exit 1
 fi
 
@@ -14,24 +14,36 @@ day=$2
 input_flag=$3
 if [[ -z "${day}" ]] || [[ -z "${year}" ]];
 then
-  echo "Usage: ./setup-problem <year> <day>"
+  echo "usage: ./aoc <year> <day>."
+  printf "\n\t--input: optional, retrieve the problem input"
+  printf "\n\t--part2: update the problem text with part 2. Won't work until an answer has been accepted for part one."
   exit 2
 fi
 
 # validate problem actually exists
 url="https://adventofcode.com/${year}/day/${day}"
-curl -I --fail-with-body "${url}"
+curl -I --fail-with-body --silent --output /dev/null --show-error "${url}"
 
 if [[ "${input_flag}" = "--input" ]];
 then
   file="${year}/day${day}/input.txt"
   if [ -f "${file}" ];
   then
-    echo "${file} already exists."
+    echo "aoc: ${file} already exists."
     exit 65
   fi
 
   curl --cookie "session=${session}" "${url}/input" >> "${file}"
+  exit 0
+elif [[ "${input_flag}" = "--part2" ]];
+then
+  file="${year}/day${day}/problem.md"
+  if [ -f "${file}" ];
+  then
+    rm "${file}"
+  fi
+
+  curl --cookie "session=${session}" --silent --show-error "${url}#part2" | pandoc -f html -t markdown >> "${file}"
   exit 0
 fi
 
@@ -39,7 +51,6 @@ fi
 if [[ ! -d "${year}" ]];
 then
   mkdir "${year}" && cd "$_" || exit 3
-  go mod init "example.com/adventofgode-${year}"
 else
  cd "${year}"
 fi
@@ -65,4 +76,5 @@ then
 fi
 
 # get problem part 1 text
-curl --cookie "session=${session}" "${url}" | pandoc -f html -t markdown >> problem_part_one.md
+curl --cookie "session=${session}" --silent --show-error "${url}" | pandoc -f html -t markdown >> problem.md
+echo "aoc: created files for problem ${url} in $(pwd)"
