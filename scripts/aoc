@@ -33,7 +33,8 @@ then
     exit 65
   fi
 
-  curl --cookie "session=${session}" "${url}/input" >> "${file}"
+  # read input file and trim trailing new line
+  curl --cookie "session=${session}" "${url}/input" | perl -pe 'chomp if eof' >> "${file}"
   exit 0
 elif [[ "${input_flag}" = "--part2" ]];
 then
