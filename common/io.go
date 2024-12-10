@@ -14,6 +14,10 @@ func Input() string {
 	return ReadFile(inputFilePath)
 }
 
+func Lines(input string) []string {
+	return strings.Split(input, "\n")
+}
+
 func ReadFile(path string) string {
 	data, err := os.ReadFile(path)
 	if err != nil {
