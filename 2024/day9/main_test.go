@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_processDisk(t *testing.T) {
@@ -25,7 +25,7 @@ func Test_processDisk(t *testing.T) {
 			want: 1928,
 		},
 		{
-			args: args{input: common.Input(), wholeFile: false},
+			args: args{input: aoc.Input(), wholeFile: false},
 			want: 6353658451014,
 		},
 		{
@@ -33,7 +33,7 @@ func Test_processDisk(t *testing.T) {
 			want: 2858,
 		},
 		{
-			args: args{input: common.Input(), wholeFile: true},
+			args: args{input: aoc.Input(), wholeFile: true},
 			want: 6382582136592,
 		},
 	}

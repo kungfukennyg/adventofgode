@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_sim(t *testing.T) {
@@ -31,7 +31,7 @@ func Test_sim(t *testing.T) {
 		},
 		{
 			args: args{
-				input: common.Input(),
+				input: aoc.Input(),
 				steps: 100,
 			},
 			want: 821,
@@ -51,7 +51,7 @@ func Test_sim(t *testing.T) {
 		},
 		{
 			args: args{
-				input:           common.Input(),
+				input:           aoc.Input(),
 				steps:           100,
 				cornersAlwaysOn: true,
 			},

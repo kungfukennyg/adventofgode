@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 type op int
@@ -23,7 +23,7 @@ func (o op) apply(a, b int) int {
 	case opMult:
 		return a * b
 	case opConcat:
-		return common.MustAtoi(strconv.Itoa(a) + strconv.Itoa(b))
+		return aoc.MustAtoi(strconv.Itoa(a) + strconv.Itoa(b))
 	default:
 		panic(fmt.Sprintf("unexpected day7.op: %#v", o))
 	}
@@ -110,8 +110,8 @@ func parse(input string) []eq {
 	eqs := []eq{}
 	for _, line := range strings.Split(input, "\n") {
 		parts := strings.Split(line, ":")
-		want := common.MustAtoi(parts[0])
-		nums := common.Ints(parts[1], " ")
+		want := aoc.MustAtoi(parts[0])
+		nums := aoc.Ints(parts[1], " ")
 		eqs = append(eqs, eq{want, nums})
 	}
 	return eqs

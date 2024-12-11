@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 type op string
@@ -35,8 +35,8 @@ type pos struct {
 func posFromStr(s string) pos {
 	parts := strings.Split(s, ",")
 	return pos{
-		x: common.MustAtoi(parts[0]),
-		y: common.MustAtoi(parts[1]),
+		x: aoc.MustAtoi(parts[0]),
+		y: aoc.MustAtoi(parts[1]),
 	}
 }
 
@@ -49,15 +49,15 @@ func parse(line string) instruction {
 	// turn on 0,0 through 999,999
 	buf := bufio.NewScanner(strings.NewReader(line))
 	buf.Split(bufio.ScanWords)
-	op := common.MustText(buf)
+	op := aoc.MustText(buf)
 	if op == "turn" {
-		op += " " + common.MustText(buf)
+		op += " " + aoc.MustText(buf)
 	}
 
 	instr := instruction{op: opFromStr(op)}
-	instr.start = posFromStr(common.MustText(buf))
-	_ = common.MustText(buf)
-	instr.end = posFromStr(common.MustText(buf))
+	instr.start = posFromStr(aoc.MustText(buf))
+	_ = aoc.MustText(buf)
+	instr.end = posFromStr(aoc.MustText(buf))
 	return instr
 }
 

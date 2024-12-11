@@ -4,7 +4,7 @@ import (
 	"math"
 	"slices"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func sum(values []int) int {
@@ -49,8 +49,8 @@ func uniqueCombos(input string, liters int) (int, int) {
 
 func parse(input string) []int {
 	out := []int{}
-	for _, s := range common.Lines(input) {
-		out = append(out, common.MustAtoi(s))
+	for _, s := range aoc.Lines(input) {
+		out = append(out, aoc.MustAtoi(s))
 	}
 	return out
 }

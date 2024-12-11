@@ -3,7 +3,7 @@ package day2
 import (
 	"strings"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func ribbonLength(input string) int {
@@ -37,9 +37,9 @@ func wrappingPaper(input string) int {
 
 func parseBox(line string) (int, int, int) {
 	parts := strings.Split(line, "x")
-	return common.MustAtoi(parts[0]),
-		common.MustAtoi(parts[1]),
-		common.MustAtoi(parts[2])
+	return aoc.MustAtoi(parts[0]),
+		aoc.MustAtoi(parts[1]),
+		aoc.MustAtoi(parts[2])
 }
 
 func smallestSides(l, w, h int) (int, int) {

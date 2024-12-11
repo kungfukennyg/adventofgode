@@ -4,7 +4,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func whichSue(input, compounds string, greater, lesser []string) int {
@@ -38,7 +38,7 @@ outer:
 
 func parsePeople(input string) []map[string]int {
 	people := []map[string]int{}
-	for _, line := range common.Lines(input) {
+	for _, line := range aoc.Lines(input) {
 		person := parsePerson(line)
 		people = append(people, person)
 	}
@@ -52,16 +52,16 @@ func parsePerson(line string) map[string]int {
 	for _, p := range strings.Split(line, ",") {
 		parts := strings.Split(p, ":")
 		prop := strings.TrimSpace(parts[0])
-		out[prop] = common.MustAtoi(strings.TrimSpace(parts[1]))
+		out[prop] = aoc.MustAtoi(strings.TrimSpace(parts[1]))
 	}
 	return out
 }
 
 func parseCompounds(compounds string) map[string]int {
 	o := map[string]int{}
-	for _, line := range common.Lines(compounds) {
+	for _, line := range aoc.Lines(compounds) {
 		parts := strings.Split(line, ":")
-		o[parts[0]] = common.MustAtoi(strings.TrimSpace(parts[1]))
+		o[parts[0]] = aoc.MustAtoi(strings.TrimSpace(parts[1]))
 	}
 	return o
 }

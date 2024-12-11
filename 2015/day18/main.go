@@ -3,7 +3,7 @@ package day18
 import (
 	"slices"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 type grid struct {
@@ -104,7 +104,7 @@ func parse(input string) *grid {
 	g := &grid{
 		lights: [][]bool{},
 	}
-	for y, line := range common.Lines(input) {
+	for y, line := range aoc.Lines(input) {
 		g.lights = append(g.lights, make([]bool, len(line)))
 		for x, s := range line {
 			if s == '#' {

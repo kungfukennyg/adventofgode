@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 const testInput = `............
@@ -33,7 +33,7 @@ func Test_findAntinodes(t *testing.T) {
 			want: 14,
 		},
 		{
-			args: args{common.Input()},
+			args: args{aoc.Input()},
 			want: 0,
 		},
 	}
@@ -74,7 +74,7 @@ func Test_findAntinodesAnyDistance(t *testing.T) {
 			want: 9,
 		},
 		{
-			args: args{common.Input()},
+			args: args{aoc.Input()},
 			want: 809,
 		},
 	}

@@ -3,7 +3,7 @@ package day15
 import (
 	"strings"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 const caloriesProp = "calories"
@@ -79,14 +79,14 @@ func parse(input string) recipe {
 	}
 
 	unique := map[string]struct{}{}
-	for _, line := range common.Lines(input) {
+	for _, line := range aoc.Lines(input) {
 		parts := strings.Split(line, ":")
 		ig := ingredient{name: parts[0], properties: map[string]int{}}
 
 		for _, part := range strings.Split(parts[1], ",") {
 			parts = strings.Split(strings.TrimSpace(part), " ")
 			prop := parts[0]
-			v := common.MustAtoi(parts[1])
+			v := aoc.MustAtoi(parts[1])
 
 			ig.properties[prop] = v
 			unique[prop] = struct{}{}

@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_lightLevel(t *testing.T) {
@@ -18,14 +18,14 @@ func Test_lightLevel(t *testing.T) {
 	}{
 		{
 			args: args{
-				input:  common.Input(),
+				input:  aoc.Input(),
 				binary: true,
 			},
 			want: 543903,
 		},
 		{
 			args: args{
-				input:  common.Input(),
+				input:  aoc.Input(),
 				binary: false,
 			},
 			want: 14687245,

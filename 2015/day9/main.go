@@ -5,7 +5,7 @@ import (
 	"math"
 	"strings"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 type graph struct {
@@ -77,7 +77,7 @@ func (g *graph) keys() []string {
 func longestDist(input string) int {
 	g := parse(input)
 	countries := g.keys()
-	perms := common.Permutate(countries)
+	perms := aoc.Permutate(countries)
 
 	longest := math.MinInt64
 	for _, route := range perms {
@@ -93,7 +93,7 @@ func longestDist(input string) int {
 func shortestDist(input string) int {
 	g := parse(input)
 	countries := g.keys()
-	perms := common.Permutate(countries)
+	perms := aoc.Permutate(countries)
 
 	lowest := math.MaxInt64
 	for _, route := range perms {
@@ -114,7 +114,7 @@ func parse(input string) *graph {
 	for _, line := range strings.Split(input, "\n") {
 		parts := strings.Split(line, " ")
 		from, to := parts[0], parts[2]
-		dist := common.MustAtoi(parts[4])
+		dist := aoc.MustAtoi(parts[4])
 
 		g.addVertex(from)
 		g.addVertex(to)

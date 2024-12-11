@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_housesThatGetPresent(t *testing.T) {
@@ -28,7 +28,7 @@ func Test_housesThatGetPresent(t *testing.T) {
 			want: 2,
 		},
 		{
-			args: args{common.Input()},
+			args: args{aoc.Input()},
 			want: 2565,
 		},
 	}
@@ -62,7 +62,7 @@ func Test_housesWithRobot(t *testing.T) {
 			want: 11,
 		},
 		{
-			args: args{common.Input()},
+			args: args{aoc.Input()},
 			want: 2639,
 		},
 	}

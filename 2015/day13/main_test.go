@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 const test = `Alice would gain 54 happiness units by sitting next to Bob.
@@ -34,7 +34,7 @@ func Test_bestSeats(t *testing.T) {
 			want: 330,
 		},
 		{
-			args: args{input: common.Input()},
+			args: args{input: aoc.Input()},
 			want: 618,
 		},
 		{
@@ -42,7 +42,7 @@ func Test_bestSeats(t *testing.T) {
 			want: 286,
 		},
 		{
-			args: args{input: common.Input(), personOpt: withPerson("me", 0)},
+			args: args{input: aoc.Input(), personOpt: withPerson("me", 0)},
 			want: 601,
 		},
 	}

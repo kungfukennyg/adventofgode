@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_furthestDistance(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_furthestDistance(t *testing.T) {
 			want: 1120,
 		},
 		{
-			args: args{input: common.Input(), seconds: 2503},
+			args: args{input: aoc.Input(), seconds: 2503},
 			want: 2660,
 		},
 	}
@@ -54,7 +54,7 @@ func Test_mostPoints(t *testing.T) {
 			want: 689,
 		},
 		{
-			args: args{input: common.Input(), seconds: 2503},
+			args: args{input: aoc.Input(), seconds: 2503},
 			want: 1256,
 		},
 	}

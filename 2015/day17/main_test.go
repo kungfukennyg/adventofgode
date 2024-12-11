@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_uniqueCombos(t *testing.T) {
@@ -27,7 +27,7 @@ func Test_uniqueCombos(t *testing.T) {
 		},
 		{
 			args: args{
-				input:  common.Input(),
+				input:  aoc.Input(),
 				liters: 150,
 			},
 			want: 654,

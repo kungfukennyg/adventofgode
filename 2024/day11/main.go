@@ -4,7 +4,7 @@ import (
 	"maps"
 	"strings"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 var powersOfTen = []int{
@@ -79,7 +79,7 @@ func parse(input string) map[int]int {
 	parts := strings.Split(input, " ")
 	stones := map[int]int{}
 	for _, s := range parts {
-		stones[common.MustAtoi(s)] += 1
+		stones[aoc.MustAtoi(s)] += 1
 	}
 	return stones
 }

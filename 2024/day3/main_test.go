@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_scanCorrupted(t *testing.T) {
@@ -25,7 +25,7 @@ func Test_scanCorrupted(t *testing.T) {
 		},
 		{
 			args: args{
-				input: common.Input(),
+				input: aoc.Input(),
 			},
 			want: 182619815,
 		},
@@ -38,7 +38,7 @@ func Test_scanCorrupted(t *testing.T) {
 		},
 		{
 			args: args{
-				input:            common.Input(),
+				input:            aoc.Input(),
 				withConditionals: true,
 			},
 			want: 80747545,

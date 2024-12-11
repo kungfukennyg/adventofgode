@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_bestRatio(t *testing.T) {
@@ -28,7 +28,7 @@ func Test_bestRatio(t *testing.T) {
 		},
 		{
 			args: args{
-				input:     common.Input(),
+				input:     aoc.Input(),
 				teaspoons: 100,
 				calories:  -1,
 			},
@@ -45,7 +45,7 @@ func Test_bestRatio(t *testing.T) {
 		},
 		{
 			args: args{
-				input:     common.Input(),
+				input:     aoc.Input(),
 				teaspoons: 100,
 				calories:  500,
 			},

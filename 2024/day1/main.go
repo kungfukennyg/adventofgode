@@ -4,7 +4,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func similarityScore(input string) int {
@@ -37,8 +37,8 @@ func parse(input string) ([]int, []int) {
 
 	for _, line := range lines {
 		parts := strings.Split(line, "   ")
-		l := common.MustAtoi(strings.TrimSpace(parts[0]))
-		r := common.MustAtoi(strings.TrimSpace(parts[1]))
+		l := aoc.MustAtoi(strings.TrimSpace(parts[0]))
+		r := aoc.MustAtoi(strings.TrimSpace(parts[1]))
 
 		left = append(left, l)
 		right = append(right, r)

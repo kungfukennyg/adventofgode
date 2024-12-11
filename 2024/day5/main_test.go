@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_correctPageNumbers(t *testing.T) {
@@ -21,7 +21,7 @@ func Test_correctPageNumbers(t *testing.T) {
 			wrong:   123,
 		},
 		{
-			args:    args{common.Input()},
+			args:    args{aoc.Input()},
 			correct: 6260,
 			wrong:   5346,
 		},

@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 type disk []int
@@ -152,7 +152,7 @@ func parse(input string) (disk, int) {
 	d := disk{}
 	id := 0
 	for _, r := range input {
-		n := common.MustAtoi(string(r))
+		n := aoc.MustAtoi(string(r))
 		if file {
 			for range n {
 				d = append(d, id)
