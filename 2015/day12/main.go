@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"regexp"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 var numPattern = regexp.MustCompile("[0-9]+|-[0-9]+")
@@ -12,7 +12,7 @@ var numPattern = regexp.MustCompile("[0-9]+|-[0-9]+")
 func sumNumbers(input string) int {
 	sum := 0
 	for _, n := range numPattern.FindAllString(input, -1) {
-		sum += common.MustAtoi(n)
+		sum += aoc.MustAtoi(n)
 	}
 	return sum
 }

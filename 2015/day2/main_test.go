@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_wrappingPaper(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_wrappingPaper(t *testing.T) {
 			want: 43,
 		},
 		{
-			args: args{common.Input()},
+			args: args{aoc.Input()},
 			want: 1588178,
 		},
 	}
@@ -54,7 +54,7 @@ func Test_ribbonLength(t *testing.T) {
 			want: 14,
 		},
 		{
-			args: args{common.Input()},
+			args: args{aoc.Input()},
 			want: 3783758,
 		},
 	}

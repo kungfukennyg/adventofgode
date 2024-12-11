@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_countPattern(t *testing.T) {
@@ -23,7 +23,7 @@ func Test_countPattern(t *testing.T) {
 		},
 		{
 			args: args{
-				input: common.Input(),
+				input: aoc.Input(),
 			},
 			want: 2336,
 		},
@@ -54,7 +54,7 @@ func Test_crossPattern(t *testing.T) {
 		},
 		{
 			args: args{
-				input: common.Input(),
+				input: aoc.Input(),
 			},
 			want: 1831,
 		},

@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_cpu(t *testing.T) {
@@ -17,7 +17,7 @@ func Test_cpu(t *testing.T) {
 		want uint16
 	}{
 		{
-			args: args{common.Input()},
+			args: args{aoc.Input()},
 			wire: "a",
 			want: 3176,
 		},
@@ -43,7 +43,7 @@ func Test_override(t *testing.T) {
 		want     uint16
 	}{
 		{
-			args:     args{common.Input()},
+			args:     args{aoc.Input()},
 			wire:     "a",
 			override: "b",
 			want:     3176,

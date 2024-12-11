@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_countNice(t *testing.T) {
@@ -20,7 +20,7 @@ func Test_countNice(t *testing.T) {
 			want: 2,
 		},
 		{
-			args: args{common.Input()},
+			args: args{aoc.Input()},
 			want: 258,
 		},
 	}
@@ -58,7 +58,7 @@ func Test_countNiceNewModel(t *testing.T) {
 			want: 0,
 		},
 		{
-			args: args{common.Input()},
+			args: args{aoc.Input()},
 			want: 53,
 		},
 	}

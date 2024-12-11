@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 type dir int
@@ -89,7 +89,7 @@ func (g grid) crossPattern(pattern string, mid rune) int {
 	}
 
 	matches := 0
-	reverse := common.Reverse(pattern)
+	reverse := aoc.Reverse(pattern)
 	for y, line := range g.lines {
 		for x, r := range line {
 			if mid != r {

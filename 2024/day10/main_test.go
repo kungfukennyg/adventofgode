@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_scoreTrailheads(t *testing.T) {
@@ -30,7 +30,7 @@ func Test_scoreTrailheads(t *testing.T) {
 			total:  81,
 		},
 		{
-			args:   args{common.Input()},
+			args:   args{aoc.Input()},
 			unique: 624,
 			total:  1483,
 		},

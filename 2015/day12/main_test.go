@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_sumNumbers(t *testing.T) {
@@ -40,7 +40,7 @@ func Test_sumNumbers(t *testing.T) {
 			want: 0,
 		},
 		{
-			args: args{input: common.Input()},
+			args: args{input: aoc.Input()},
 			want: 156366,
 		},
 	}
@@ -78,7 +78,7 @@ func Test_sumSkipRed(t *testing.T) {
 			want: 6,
 		},
 		{
-			args: args{common.Input()},
+			args: args{aoc.Input()},
 			want: 96852,
 		},
 	}

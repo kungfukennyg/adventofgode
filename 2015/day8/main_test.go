@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 const testInput = `""
@@ -25,7 +25,7 @@ func Test_escape(t *testing.T) {
 			want: 12,
 		},
 		{
-			args: args{common.Input()},
+			args: args{aoc.Input()},
 			want: 1369,
 		},
 	}
@@ -51,7 +51,7 @@ func Test_unescape(t *testing.T) {
 			want: 19,
 		},
 		{
-			args: args{common.Input()},
+			args: args{aoc.Input()},
 			want: 2074,
 		},
 	}

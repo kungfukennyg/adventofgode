@@ -5,7 +5,7 @@ import (
 	"math"
 	"strings"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 type reindeer struct {
@@ -103,9 +103,9 @@ func parse(input string) []*reindeer {
 		parts := strings.Split(line, " ")
 		r := reindeer{
 			name:     parts[0],
-			speed:    common.MustAtoi(parts[3]),
-			airTime:  common.MustAtoi(parts[6]),
-			restTime: common.MustAtoi(parts[13]),
+			speed:    aoc.MustAtoi(parts[3]),
+			airTime:  aoc.MustAtoi(parts[6]),
+			restTime: aoc.MustAtoi(parts[13]),
 		}
 		deer = append(deer, &r)
 	}

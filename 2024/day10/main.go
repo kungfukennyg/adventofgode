@@ -3,7 +3,7 @@ package day10
 import (
 	"fmt"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 type dir int
@@ -99,10 +99,10 @@ func scoreTrailheads(input string) (int, int) {
 
 func parse(input string) grid {
 	g := grid{heights: [][]int{}}
-	for y, line := range common.Lines(input) {
+	for y, line := range aoc.Lines(input) {
 		g.heights = append(g.heights, make([]int, len(line)))
 		for x, s := range line {
-			n := common.MustAtoi(string(s))
+			n := aoc.MustAtoi(string(s))
 			g.heights[y][x] = n
 			if n == 0 {
 				g.trailHeads = append(g.trailHeads, pos{x, y})

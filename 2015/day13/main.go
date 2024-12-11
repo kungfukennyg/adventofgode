@@ -4,13 +4,13 @@ import (
 	"math"
 	"strings"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 type graph struct {
 	vertices map[string]*vertex
 	keys     []string
-}	
+}
 
 type edge struct {
 	weight int
@@ -89,7 +89,7 @@ func bestSeats(input string, opts ...opt) int {
 		o(g)
 	}
 
-	perms := common.Permutate(g.keys)
+	perms := aoc.Permutate(g.keys)
 	highest := math.MinInt64
 	for _, seats := range perms {
 		happiness := g.sum(seats)
@@ -110,7 +110,7 @@ func parse(input string) *graph {
 		parts := strings.Split(line, " ")
 		a, b := parts[0], parts[10]
 		b = b[:len(b)-1]
-		happiness := common.MustAtoi(parts[3])
+		happiness := aoc.MustAtoi(parts[3])
 		if parts[2] == "lose" {
 			happiness *= -1
 		}

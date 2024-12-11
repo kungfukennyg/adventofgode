@@ -4,7 +4,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 // match instructions matching `mul(0-999, 0-999)`
@@ -44,8 +44,8 @@ func findProducts(input string, withConditionals bool) []int {
 		instr = strings.ReplaceAll(instr, "mul(", "")
 		instr = strings.ReplaceAll(instr, ")", "")
 		parts := strings.Split(instr, ",")
-		a := common.MustAtoi(parts[0])
-		b := common.MustAtoi(parts[1])
+		a := aoc.MustAtoi(parts[0])
+		b := aoc.MustAtoi(parts[1])
 
 		products = append(products, a*b)
 	}

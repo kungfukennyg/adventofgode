@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_countSafeReports(t *testing.T) {
@@ -25,7 +25,7 @@ func Test_countSafeReports(t *testing.T) {
 		},
 		{
 			args: args{
-				input:        common.Input(),
+				input:        aoc.Input(),
 				withDampener: false,
 			},
 			want: 524,
@@ -39,7 +39,7 @@ func Test_countSafeReports(t *testing.T) {
 		},
 		{
 			args: args{
-				input:        common.Input(),
+				input:        aoc.Input(),
 				withDampener: true,
 			},
 			want: 569,

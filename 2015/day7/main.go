@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 type cpuV2 struct {
@@ -128,12 +128,12 @@ func parse(instructions string) []instr {
 	for _, line := range lines {
 		buf := bufio.NewScanner(strings.NewReader(line))
 		buf.Split(bufio.ScanWords)
-		op := common.MustText(buf)
+		op := aoc.MustText(buf)
 		switch op {
 		case "NOT":
-			src := common.MustText(buf)
+			src := aoc.MustText(buf)
 			buf.Scan()
-			dst := common.MustText(buf)
+			dst := aoc.MustText(buf)
 			instrs = append(instrs, instr{
 				op:  op,
 				a:   src,
@@ -141,8 +141,8 @@ func parse(instructions string) []instr {
 			})
 		default:
 			a := op
-			op = common.MustText(buf)
-			b := common.MustText(buf)
+			op = aoc.MustText(buf)
+			b := aoc.MustText(buf)
 			if op == "->" {
 				instrs = append(instrs, instr{
 					op:  op,
@@ -153,7 +153,7 @@ func parse(instructions string) []instr {
 			}
 
 			buf.Scan()
-			dst := common.MustText(buf)
+			dst := aoc.MustText(buf)
 			switch op {
 			case "AND":
 			case "OR":

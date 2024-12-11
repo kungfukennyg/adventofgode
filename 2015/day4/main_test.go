@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_fiveZeroMD5(t *testing.T) {
@@ -32,14 +32,14 @@ func Test_fiveZeroMD5(t *testing.T) {
 		},
 		{
 			args: args{
-				secretKey: common.Input(),
+				secretKey: aoc.Input(),
 				prefix:    "00000",
 			},
 			want: 117946,
 		},
 		{
 			args: args{
-				secretKey: common.Input(),
+				secretKey: aoc.Input(),
 				prefix:    "000000",
 			},
 			want: 3938038,

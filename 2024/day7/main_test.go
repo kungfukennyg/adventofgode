@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 const testInput = `190: 10 19
@@ -35,7 +35,7 @@ func Test_calibrationResult(t *testing.T) {
 		},
 		{
 			args: args{
-				input: common.Input(),
+				input: aoc.Input(),
 				ops:   []op{opAdd, opMult},
 			},
 			want: 882304362421,
@@ -49,7 +49,7 @@ func Test_calibrationResult(t *testing.T) {
 		},
 		{
 			args: args{
-				input: common.Input(),
+				input: aoc.Input(),
 				ops:   []op{opAdd, opMult, opConcat},
 			},
 			want: 145149066755184,

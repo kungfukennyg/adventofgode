@@ -4,7 +4,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 type rule struct {
@@ -53,7 +53,7 @@ func parse(input string) (map[int]rule, [][]int) {
 	for _, line := range strings.Split(input, "\n") {
 		if strings.Contains(line, "|") {
 			parts := strings.Split(line, "|")
-			before, after := common.MustAtoi(parts[0]), common.MustAtoi(parts[1])
+			before, after := aoc.MustAtoi(parts[0]), aoc.MustAtoi(parts[1])
 			r, ok := rules[before]
 			if !ok {
 				r = rule{
@@ -66,7 +66,7 @@ func parse(input string) (map[int]rule, [][]int) {
 		} else if strings.Contains(line, ",") {
 			update := []int{}
 			for _, page := range strings.Split(line, ",") {
-				update = append(update, common.MustAtoi(page))
+				update = append(update, aoc.MustAtoi(page))
 			}
 			updates = append(updates, update)
 		}

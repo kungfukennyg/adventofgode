@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_shortestDist(t *testing.T) {
@@ -20,7 +20,7 @@ func Test_shortestDist(t *testing.T) {
 			want: 605,
 		},
 		{
-			args: args{common.Input()},
+			args: args{aoc.Input()},
 			want: 251,
 		},
 	}
@@ -46,7 +46,7 @@ func Test_longestDist(t *testing.T) {
 			want: 982,
 		},
 		{
-			args: args{common.Input()},
+			args: args{aoc.Input()},
 			want: 898,
 		},
 	}

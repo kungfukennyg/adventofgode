@@ -4,7 +4,7 @@ import (
 	"slices"
 	"strings"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func problemDampener(report []int) bool {
@@ -71,7 +71,7 @@ func loadReport(input string) [][]int {
 	for _, line := range strings.Split(input, "\n") {
 		report := []int{}
 		for _, level := range strings.Split(line, " ") {
-			report = append(report, common.MustAtoi(level))
+			report = append(report, aoc.MustAtoi(level))
 		}
 		reports = append(reports, report)
 	}

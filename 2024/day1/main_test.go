@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_totalDistance(t *testing.T) {
@@ -20,7 +20,7 @@ func Test_totalDistance(t *testing.T) {
 			want: 11,
 		},
 		{
-			args: args{common.Input()},
+			args: args{aoc.Input()},
 			want: 2192892,
 		},
 	}
@@ -46,7 +46,7 @@ func Test_similarityScore(t *testing.T) {
 			want: 31,
 		},
 		{
-			args: args{common.Input()},
+			args: args{aoc.Input()},
 			want: 22962826,
 		},
 	}

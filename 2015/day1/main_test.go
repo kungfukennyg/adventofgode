@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_findFloor(t *testing.T) {
@@ -16,7 +16,7 @@ func Test_findFloor(t *testing.T) {
 		want int
 	}{
 		{
-			args: args{common.Input()},
+			args: args{aoc.Input()},
 			want: 0,
 		},
 		{
@@ -82,7 +82,7 @@ func Test_firstEnterBasement(t *testing.T) {
 			want: 5,
 		},
 		{
-			args: args{common.Input()},
+			args: args{aoc.Input()},
 			want: 1797,
 		},
 	}

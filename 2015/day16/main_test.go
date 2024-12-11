@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 func Test_whichSue(t *testing.T) {
@@ -19,7 +19,7 @@ func Test_whichSue(t *testing.T) {
 	}{
 		{
 			args: args{
-				input: common.Input(),
+				input: aoc.Input(),
 				compounds: `children: 3
 cats: 7
 samoyeds: 2
@@ -35,7 +35,7 @@ perfumes: 1`,
 		},
 		{
 			args: args{
-				input:   common.Input(),
+				input:   aoc.Input(),
 				greater: []string{"cats", "trees"},
 				lesser:  []string{"pomeranians", "goldfish"},
 				compounds: `children: 3

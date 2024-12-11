@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/kungfukennyg/adventofgode/common"
+	"github.com/kungfukennyg/adventofgode/aoc"
 )
 
 const testInput = `....#.....
@@ -31,7 +31,7 @@ func Test_visitedByGuard(t *testing.T) {
 			want: 41,
 		},
 		{
-			args: args{common.Input()},
+			args: args{aoc.Input()},
 			want: 4580,
 		},
 	}
@@ -58,7 +58,7 @@ func Test_infiniteObstacles(t *testing.T) {
 			want: 6,
 		},
 		{
-			args: args{common.Input()},
+			args: args{aoc.Input()},
 			want: 1480,
 		},
 	}
