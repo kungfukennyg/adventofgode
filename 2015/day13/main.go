@@ -10,7 +10,7 @@ import (
 type graph struct {
 	vertices map[string]*vertex
 	keys     []string
-}
+}	
 
 type edge struct {
 	weight int
