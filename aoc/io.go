@@ -44,6 +44,21 @@ func MustText(buf *bufio.Scanner) string {
 	return buf.Text()
 }
 
+func IndicesOf(str string, find string) []int {
+	ids := []int{}
+	for i := 0; i < len(str); i++ {
+		if len(find) > 1 && i+len(find) >= len(str) {
+			continue
+		}
+		s := str[i : i+len(find)]
+		if s == find {
+			ids = append(ids, i)
+		}
+	}
+
+	return ids
+}
+
 func Reverse(s string) string {
 	size := len(s)
 	buf := make([]byte, size)
@@ -66,32 +81,4 @@ func Ints(s string, delim string) []int {
 		out = append(out, MustAtoi(s))
 	}
 	return out
-}
-
-func Permutate[T any](arr []T) [][]T {
-	var helper func([]T, int)
-	res := [][]T{}
-
-	helper = func(arr []T, n int) {
-		if n == 1 {
-			tmp := make([]T, len(arr))
-			copy(tmp, arr)
-			res = append(res, tmp)
-		} else {
-			for i := 0; i < n; i++ {
-				helper(arr, n-1)
-				if n%2 == 1 {
-					tmp := arr[i]
-					arr[i] = arr[n-1]
-					arr[n-1] = tmp
-				} else {
-					tmp := arr[0]
-					arr[0] = arr[n-1]
-					arr[n-1] = tmp
-				}
-			}
-		}
-	}
-	helper(arr, len(arr))
-	return res
 }
