@@ -42,10 +42,21 @@ func (pq *PriorityQueue[T]) Push(t T, priority int) int {
 	return qi.index
 }
 
-func (pq *PriorityQueue[T]) Get(index int) QueueItem[T] {
-	internal := *(pq.wrapped)
-	qi := internal[index]
-	return QueueItem[T]{wrapped: qi}
+func (pq *PriorityQueue[T]) Pop() T {
+	v := heap.Pop(pq.wrapped)
+	qi := v.(*queueItem)
+	t := qi.value.(T)
+	return t
+}
+
+func (pq *PriorityQueue[T]) Tail() *T {
+	internal := *pq.wrapped
+	n := len(internal)
+	if n == 0 {
+		return nil
+	}
+	t := internal[len(internal)-1]
+	return t.value.(*T)
 }
 
 // Consume empties the entire queue and stores each element in order in a slice of its values
@@ -53,17 +64,13 @@ func (pq *PriorityQueue[T]) Consume() []T {
 	out := make([]T, 0, pq.Len())
 	for pq.Len() > 0 {
 		qi := pq.Pop()
-		out = append(out, qi.Value())
+		out = append(out, qi)
 	}
 	return out
 }
 
-func (pq *PriorityQueue[T]) Pop() QueueItem[T] {
-	t := heap.Pop(pq.wrapped)
-	qi := t.(*queueItem)
-	return QueueItem[T]{wrapped: qi}
-}
-
+// Update updates the value and priority of an item in the queue, and then
+// reorders the queue.
 func (pq *PriorityQueue[T]) Update(index int, value T, priority int) {
 	internal := *(pq.wrapped)
 	qi := internal[index]

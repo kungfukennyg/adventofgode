@@ -82,3 +82,10 @@ func Ints(s string, delim string) []int {
 	}
 	return out
 }
+
+func Abs(x int) int {
+	if x < 0 {
+		return x * -1
+	}
+	return x
+}
