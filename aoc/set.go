@@ -13,6 +13,12 @@ func (s Set[T]) Add(t T) bool {
 	return true
 }
 
+func (s Set[T]) AddAll(v []T) {
+	for _, t := range v {
+		s[t] = struct{}{}
+	}
+}
+
 func (s Set[T]) Contains(t T) bool {
 	_, ok := s[t]
 	return ok

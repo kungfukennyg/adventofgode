@@ -32,7 +32,7 @@ var diagonals = []aoc.Dir{aoc.DirUpLeft, aoc.DirUpRight, aoc.DirDownLeft, aoc.Di
 
 func (r *region) sides(grid aoc.Grid[rune]) int {
 	isSame := func(p aoc.Pos, r rune) bool {
-		return grid.BoundsCheck(p) && grid.GetByPos(p) == r
+		return grid.BoundsCheck(p) && grid.Get(p) == r
 	}
 
 	corners := 0
@@ -86,7 +86,7 @@ func fencePrice(input string, discount bool) int {
 func getRegions(grid aoc.Grid[rune]) []*region {
 	regions := []*region{}
 	added := aoc.Set[aoc.Pos]{}
-	for pos, r := range grid.Points() {
+	for pos, r := range grid.Values() {
 		if added.Contains(pos) {
 			continue
 		}
@@ -104,7 +104,7 @@ func getRegions(grid aoc.Grid[rune]) []*region {
 				continue
 			}
 
-			v := grid.GetByPos(p)
+			v := grid.Get(p)
 			region.add(p)
 			added.Add(p)
 
@@ -129,7 +129,7 @@ func parse(input string) aoc.Grid[rune] {
 	for y, row := range aoc.Lines(input) {
 		g.AddRow(make([]rune, len(row)))
 		for x, p := range row {
-			g.Set(x, y, p)
+			g.SetByXY(x, y, p)
 		}
 	}
 	return g
