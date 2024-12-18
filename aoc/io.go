@@ -83,6 +83,16 @@ func Ints(s string, delim string) []int {
 	return out
 }
 
+func JoinInts(o []int, delim string) string {
+	var sb strings.Builder
+	for _, i := range o {
+		sb.WriteString(strconv.Itoa(i))
+		sb.WriteString(delim)
+	}
+
+	return strings.TrimSuffix(sb.String(), ",")
+}
+
 func Abs(x int) int {
 	if x < 0 {
 		return x * -1

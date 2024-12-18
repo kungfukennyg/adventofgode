@@ -2,6 +2,12 @@ package aoc
 
 type Set[T comparable] map[T]struct{}
 
+func SetWithValues[T comparable](values []T) Set[T] {
+	s := Set[T]{}
+	s.AddAll(values)
+	return s
+}
+
 // Add adds t to the Set, and returns true if the Set did not already
 // contain t.
 func (s Set[T]) Add(t T) bool {
