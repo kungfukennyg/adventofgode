@@ -103,6 +103,21 @@ func (g *Grid[T]) Neighbors(p Pos, dirs []Dir) iter.Seq2[Pos, T] {
 	}
 }
 
+func (g *Grid[T]) NeighborVecs(p Pos, dirs []Dir) iter.Seq2[Vec, T] {
+	return func(yield func(Vec, T) bool) {
+		for _, d := range dirs {
+			pos := p.Step(d)
+			if !g.BoundsCheck(pos) {
+				continue
+			}
+
+			if !yield(Vec{P: pos, D: d}, g.Get(pos)) {
+				return
+			}
+		}
+	}
+}
+
 func (g *Grid[T]) Rows() iter.Seq2[int, []T] {
 	return func(yield func(int, []T) bool) {
 		for y, row := range g.points {
