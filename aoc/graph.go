@@ -31,9 +31,9 @@ func (v *Vertex[T]) Neighbors() []*Vertex[T] {
 }
 
 // NewGraph creates a new empty graph.
-func NewGraph[T comparable]() *Graph[string] {
-	return &Graph[string]{
-		Vertices: map[string]*Vertex[string]{},
+func NewGraph[T comparable]() *Graph[T] {
+	return &Graph[T]{
+		Vertices: map[string]*Vertex[T]{},
 		Keys:     []string{},
 	}
 }

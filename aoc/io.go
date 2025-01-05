@@ -42,6 +42,14 @@ func MustAtoi64(s string) int64 {
 	return n
 }
 
+func MustBool(s string) bool {
+	b, err := strconv.ParseBool(s)
+	if err != nil {
+		panic(err)
+	}
+	return b
+}
+
 func MustText(buf *bufio.Scanner) string {
 	if !buf.Scan() {
 		if buf.Err() != nil {
