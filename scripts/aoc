@@ -4,7 +4,7 @@ set -e
 session="${AOC_SESSION_TOKEN}"
 if [[ -z "${session}" ]];
 then
-  echo "aoc: $AOC_SESSION_TOKEN must be set. Get a token from authenticating at https://adventofcode.com"
+  echo "aoc: $AOC_SESSION_TOKEN must be set. Get a token from your browser local storage after authenticating at https://adventofcode.com"
   exit 1
 fi
 
@@ -16,7 +16,6 @@ if [[ -z "${day}" ]] || [[ -z "${year}" ]];
 then
   echo "usage: ./aoc <year> <day>."
   printf "\n\t--input: optional, retrieve the problem input"
-  printf "\n\t--part2: update the problem text with part 2. Won't work until an answer has been accepted for part one."
   exit 2
 fi
 
@@ -36,18 +35,7 @@ then
   # read input file and trim trailing new line
   curl --cookie "session=${session}" "${url}/input" | perl -pe 'chomp if eof' >> "${file}"
   exit 0
-elif [[ "${input_flag}" = "--part2" ]];
-then
-  file="${year}/day${day}/problem.md"
-  if [ -f "${file}" ];
-  then
-    rm "${file}"
-  fi
-
-  curl --cookie "session=${session}" --silent --show-error "${url}#part2" | pandoc -f html -t markdown >> "${file}"
-  exit 0
 fi
-
 # setup year and day dirs
 if [[ ! -d "${year}" ]];
 then
@@ -63,19 +51,14 @@ cd "$_"
 cat << EOF > main.go
 package day${day}
 
+func parse(input string) {
+    for _, line := range aoc.Lines(input) {
+        
+    }
+}
+
 EOF
 cat << EOF > main_test.go
 package day${day}
 
 EOF
-
-# tool for parsing problem text pages
-parser="pandoc"
-if ! brew list "${parser}" &>/dev/null; 
-then
-  brew install "${parser}"
-fi
-
-# get problem part 1 text
-curl --cookie "session=${session}" --silent --show-error "${url}" | pandoc -f html -t markdown >> problem.md
-echo "aoc: created files for problem ${url} in $(pwd)"
