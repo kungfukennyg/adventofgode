@@ -9,3 +9,5 @@ go.work.sum
 .env
 
 .vscode/launch.json
+
+**/input.txt
