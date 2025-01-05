@@ -34,6 +34,14 @@ func MustAtoi(s string) int {
 	return n
 }
 
+func MustAtoi64(s string) int64 {
+	n, err := strconv.ParseInt(s, 10, 64)
+	if err != nil {
+		panic(err)
+	}
+	return n
+}
+
 func MustText(buf *bufio.Scanner) string {
 	if !buf.Scan() {
 		if buf.Err() != nil {
@@ -79,6 +87,19 @@ func Ints(s string, delim string) []int {
 		}
 
 		out = append(out, MustAtoi(s))
+	}
+	return out
+}
+
+func Int64s(s string, delim string) []int64 {
+	parts := strings.Split(s, delim)
+	out := []int64{}
+	for _, s := range parts {
+		if len(strings.TrimSpace(s)) == 0 {
+			continue
+		}
+
+		out = append(out, MustAtoi64(s))
 	}
 	return out
 }
