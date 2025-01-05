@@ -2,23 +2,6 @@ package aoc
 
 import "container/heap"
 
-// QueueItem is a generic item in our PriorityQueue.
-type QueueItem[T any] struct {
-	wrapped *queueItem
-}
-
-func (qi QueueItem[T]) Value() T {
-	return qi.wrapped.value.(T)
-}
-
-func (qi QueueItem[T]) Priority() int {
-	return qi.wrapped.priority
-}
-
-func (qi QueueItem[T]) Index() int {
-	return qi.wrapped.index
-}
-
 // PriorityQueue is a generic priority queue, backed internally by the heap.Interface interface
 type PriorityQueue[T any] struct {
 	wrapped *priorityQueue
@@ -47,6 +30,13 @@ func (pq *PriorityQueue[T]) Pop() T {
 	qi := v.(*queueItem)
 	t := qi.value.(T)
 	return t
+}
+
+func (pq *PriorityQueue[T]) PopPriority() (T, int) {
+	v := heap.Pop(pq.wrapped)
+	qi := v.(*queueItem)
+	t := qi.value.(T)
+	return t, qi.priority
 }
 
 func (pq *PriorityQueue[T]) Tail() *T {
