@@ -18,6 +18,15 @@ func Lines(input string) []string {
 	return strings.Split(input, "\n")
 }
 
+func ContainsOnly(in string, set string) bool {
+	for _, s := range in {
+		if !strings.ContainsRune(set, s) {
+			return false
+		}
+	}
+	return true
+}
+
 func ReadFile(path string) string {
 	data, err := os.ReadFile(path)
 	if err != nil {
