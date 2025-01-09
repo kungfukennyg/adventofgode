@@ -2,18 +2,84 @@ package day17
 
 import (
 	"fmt"
-	"math"
 	"slices"
 	"strings"
 
 	"github.com/kungfukennyg/adventofgode/aoc"
+	"github.com/kungfukennyg/adventofgode/aoc/opt"
 )
 
+var instrNames = []string{"adv", "bxl", "bst", "jnz", "bxc", "out", "bdv", "cdv"}
+
+type instruction uint8
+
+const (
+	adv instruction = iota
+	bxl
+	bst
+	jnz
+	bxc
+	out
+	bdv
+	cdv
+)
+
+func (i instruction) isLiteral() bool {
+	switch i {
+	case bxl:
+		return true
+	case bxc:
+		return true
+	case jnz:
+		return true
+	default:
+		return false
+	}
+}
+
+func (i instruction) String() string {
+	return instrNames[i]
+}
+
+type operand uint8
+
+const (
+	Literal  operand = 0
+	A        operand = 4
+	B        operand = 5
+	C        operand = 6
+	Reserved operand = 7
+)
+
+func operandFromValue(v uint8) operand {
+	if v <= 3 {
+		return Literal
+	}
+
+	return operand(v)
+}
+
 type cpu struct {
-	a, b, c int
-	pc      int
-	memory  []int
-	output  []int
+	a, b, c uint64
+	pc      uint64
+	memory  []uint8
+	output  []uint8
+}
+
+func (c *cpu) read(n uint8) uint64 {
+	op := operandFromValue(n)
+	switch op {
+	case Literal:
+		return uint64(n)
+	case A:
+		return c.a
+	case B:
+		return c.b
+	case C:
+		return c.c
+	default:
+		panic(fmt.Errorf("cpu.read: unexpected operand '%v'", op))
+	}
 }
 
 func (c *cpu) Clone() *cpu {
@@ -21,45 +87,10 @@ func (c *cpu) Clone() *cpu {
 		a:      c.a,
 		b:      c.b,
 		c:      c.c,
+		pc:     c.pc,
 		memory: slices.Clone(c.memory),
 		output: slices.Clone(c.output),
 	}
-}
-
-var useComboOperand = aoc.SetWithValues([]int{0, 2, 5, 6, 7})
-var opcodeToName = map[int]string{0: "adv", 1: "bxl", 2: "bst", 3: "jnz", 4: "bxc", 5: "out", 6: "bdv", 7: "scdv"}
-
-func findValidStart(input string) int {
-	initial := parse(input)
-	n := len(initial.memory)
-	program := slices.Clone(initial.memory)
-
-outer:
-	for i := 0; i < math.MaxInt64; i++ {
-		c := initial.Clone()
-		c.a = i
-
-		for steps := 0; steps < 100000; steps++ {
-			if i%100_000 == 0 {
-				fmt.Printf("i: %d, steps: %d\n", i, steps)
-			}
-			ok := c.step()
-
-			if len(c.output) > n {
-				continue outer
-			} else if len(c.output) == n && slices.Equal(c.output, program) {
-				return i
-			} else if len(c.output) > 0 && !slices.Equal(c.output, program[:len(c.output)]) {
-				continue outer
-			}
-
-			if !ok {
-				break
-			}
-		}
-	}
-
-	return -1
 }
 
 func (c *cpu) Run() string {
@@ -67,93 +98,85 @@ func (c *cpu) Run() string {
 
 	}
 
-	return aoc.JoinInts(c.output, ",")
+	return aoc.JoinUint8s(c.output, ",")
 }
 
 func (c *cpu) step() bool {
-	if c.pc >= len(c.memory) {
+	if c.pc+1 >= uint64(len(c.memory)) {
 		return false
 	}
 
-	instr := c.memory[c.pc]
-	n := c.memory[c.pc+1]
-	s := opcodeToName[instr]
-	_ = s
-	operand := c.operand(instr, n)
-	switch instr {
-	case 0:
-		// adv
-		c.a = int(c.a / int(math.Pow(2, float64(operand))))
-		c.pc += 2
-	case 1:
-		// bxl
-		c.b ^= operand
-		c.pc += 2
-	case 2:
-		// bst
-		c.b = operand % 8
-		c.pc += 2
-	case 3:
-		// jnz
-		if c.a != 0 {
-			c.pc = operand
-		} else {
-			c.pc += 2
-		}
-	case 4:
-		// bxc
-		c.b ^= c.c
-		c.pc += 2
-	case 5:
-		// out
-		o := operand % 8
-		c.output = append(c.output, o)
-		c.pc += 2
-	case 6:
-		// bdv
-		c.b = int(c.a / int(math.Pow(2, float64(operand))))
-		c.pc += 2
-	case 7:
-		// cdv
-		c.c = int(c.a / int(math.Pow(2, float64(operand))))
-		c.pc += 2
+	instr := instruction(c.memory[c.pc])
+	var operand uint64
+	if instr.isLiteral() {
+		operand = uint64(c.memory[c.pc+1])
+	} else {
+		operand = c.read(c.memory[c.pc+1])
 	}
 
+	switch instr {
+	case adv:
+		// a / pow(2, operand)
+		c.a >>= operand
+	case bdv:
+		// b = a / pow(2, operand)
+		c.b = c.a >> operand
+	case cdv:
+		// c = a / pow(2, operand)
+		c.c = c.a >> operand
+	case bxl:
+		// bitwise XOR
+		c.b ^= operand
+	case bst:
+		// modulo 8, aka keep lowest 3 bits, 0x7 = 0b0000_0111
+		c.b = operand & 0x7
+	case jnz:
+		// jump if not zero
+		if c.a != 0 {
+			c.pc = operand
+			return true
+		}
+	case bxc:
+		// bitwise XOR b and c
+		c.b ^= c.c
+	case out:
+		// write 3 lowest bits to output
+		o := operand & 0x7
+		c.output = append(c.output, uint8(o))
+	}
+
+	c.pc += 2
 	return true
 }
 
-func (c *cpu) operand(instr, op int) int {
-	if !useComboOperand.Contains(instr) {
-		return op
-	}
-	if op >= 0 && op <= 3 {
-		return op
+func inputFromProgram(input string) uint64 {
+	c := parse(input)
+	var backtrack func(a uint64, index int) opt.Some[uint64]
+	backtrack = func(a uint64, index int) opt.Some[uint64] {
+		var bit uint64
+		for bit = range 8 {
+			c := c.Clone()
+			next := (a << 3) | bit
+			c.a = next
+			c.Run()
+			if c.output[0] == c.memory[index] {
+				if index == 0 {
+					return opt.From(next)
+				}
+
+				if v := backtrack(next, index-1); v.Ok() {
+					return v
+				}
+			}
+		}
+		return opt.None[uint64]()
 	}
 
-	switch op {
-	case 4:
-		return c.a
-	case 5:
-		return c.b
-	case 6:
-		return c.c
-	case 7:
-		return op
-	default:
-		panic(fmt.Errorf("unexpected combo operand op: %d", op))
-	}
-}
-
-func (c *cpu) write(addr, value int) {
-	c.memory[addr] = value
-}
-
-func (c *cpu) read(addr int) int {
-	return c.memory[addr]
+	return backtrack(0, len(c.memory)-1).Or(0)
 }
 
 func parse(input string) *cpu {
-	c := cpu{output: []int{}}
+	c := cpu{output: []uint8{}}
 	for _, line := range aoc.Lines(input) {
 		if len(strings.TrimSpace(line)) == 0 {
 			continue
@@ -164,14 +187,14 @@ func parse(input string) *cpu {
 			reg := strings.ReplaceAll(parts[0], "Register ", "")
 			switch reg {
 			case "A":
-				c.a = aoc.MustAtoi(parts[1])
+				c.a = uint64(aoc.MustAtoi(parts[1]))
 			case "B":
-				c.b = aoc.MustAtoi(parts[1])
+				c.b = uint64(aoc.MustAtoi(parts[1]))
 			case "C":
-				c.c = aoc.MustAtoi(parts[1])
+				c.c = uint64(aoc.MustAtoi(parts[1]))
 			}
 		} else if strings.HasPrefix(line, "Program:") {
-			c.memory = aoc.Ints(parts[1], ",")
+			c.memory = aoc.Uint8s(parts[1], ",")
 		}
 	}
 	return &c

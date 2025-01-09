@@ -51,6 +51,14 @@ func MustAtoi64(s string) int64 {
 	return n
 }
 
+func MustUint8(s string) uint8 {
+	n, err := strconv.ParseUint(s, 10, 8)
+	if err != nil {
+		panic(err)
+	}
+	return uint8(n)
+}
+
 func MustBool(s string) bool {
 	b, err := strconv.ParseBool(s)
 	if err != nil {
@@ -121,10 +129,33 @@ func Int64s(s string, delim string) []int64 {
 	return out
 }
 
+func Uint8s(s string, delim string) []uint8 {
+	parts := strings.Split(s, delim)
+	out := []uint8{}
+	for _, s := range parts {
+		if len(strings.TrimSpace(s)) == 0 {
+			continue
+		}
+
+		out = append(out, MustUint8(s))
+	}
+	return out
+}
+
 func JoinInts(o []int, delim string) string {
 	var sb strings.Builder
 	for _, i := range o {
 		sb.WriteString(strconv.Itoa(i))
+		sb.WriteString(delim)
+	}
+
+	return strings.TrimSuffix(sb.String(), ",")
+}
+
+func JoinUint8s(o []uint8, delim string) string {
+	var sb strings.Builder
+	for _, i := range o {
+		sb.WriteString(strconv.FormatUint(uint64(i), 8))
 		sb.WriteString(delim)
 	}
 

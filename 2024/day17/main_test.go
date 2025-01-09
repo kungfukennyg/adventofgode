@@ -13,13 +13,13 @@ func Test_cpu(t *testing.T) {
 	}
 	tests := []struct {
 		args          args
-		wantRegisters map[string]int
+		wantRegisters map[string]uint64
 		wantOutput    string
 	}{
 		{
 			args: args{`Register C: 9
 Program: 2,6`},
-			wantRegisters: map[string]int{"b": 1},
+			wantRegisters: map[string]uint64{"b": 1},
 		},
 		{
 			args: args{`Register A: 10
@@ -29,23 +29,23 @@ Program: 5,0,5,1,5,4`},
 		{
 			args: args{`Register A: 2024
 Program: 0,1,5,4,3,0`},
-			wantRegisters: map[string]int{"a": 0},
+			wantRegisters: map[string]uint64{"a": 0},
 			wantOutput:    "4,2,5,6,7,7,7,7,3,1,0",
 		},
 		{
 			args: args{`Register B: 29
 Program: 1,7`},
-			wantRegisters: map[string]int{"b": 26},
+			wantRegisters: map[string]uint64{"b": 26},
 		},
 		{
 			args: args{`Register B: 2024
 Register C: 43690
 Program: 4,0`},
-			wantRegisters: map[string]int{"b": 44354},
+			wantRegisters: map[string]uint64{"b": 44354},
 		},
 		{
 			args:          args{aoc.Input()},
-			wantRegisters: map[string]int{},
+			wantRegisters: map[string]uint64{},
 			wantOutput:    "7,0,3,1,2,6,3,7,1",
 		},
 	}
@@ -71,13 +71,13 @@ Program: 4,0`},
 	}
 }
 
-func Test_findValidStart(t *testing.T) {
+func Test_inputFromProgram(t *testing.T) {
 	type args struct {
 		input string
 	}
 	tests := []struct {
 		args args
-		want int
+		want uint64
 	}{
 		{
 			args: args{`Register A: 2024
@@ -89,13 +89,13 @@ Program: 0,3,5,4,3,0`},
 		},
 		{
 			args: args{aoc.Input()},
-			want: 0,
+			want: 109020013201563,
 		},
 	}
 	for i, tt := range tests {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
-			if got := findValidStart(tt.args.input); got != tt.want {
-				t.Errorf("findValidStart() = %v, want %v", got, tt.want)
+			if got := inputFromProgram(tt.args.input); got != tt.want {
+				t.Errorf("inputFromProgram() = %v, want %v", got, tt.want)
 			}
 		})
 	}
