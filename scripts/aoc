@@ -51,6 +51,8 @@ cd "$_"
 cat << EOF > main.go
 package day${day}
 
+import "github.com/kungfukennyg/adventofgode/aoc"
+
 func parse(input string) {
     for _, line := range aoc.Lines(input) {
         
