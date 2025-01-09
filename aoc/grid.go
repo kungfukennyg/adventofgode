@@ -64,6 +64,40 @@ func (g *Grid[T]) GetRow(y int) []T {
 	return g.points[y]
 }
 
+// DFS performas a depth-first search of the grid, starting at start and
+// ending using the provided function
+func (g *Grid[T]) DFS(start Pos,
+	neighborFn func(cur Pos) []Pos,
+	keepFn func(cur Pos) bool) []Pos {
+
+	if !g.BoundsCheck(start) {
+		return []Pos{}
+	}
+
+	visited := Set[Pos]{}
+	var backtrack func(Pos) []Pos
+	backtrack = func(cur Pos) []Pos {
+		if !visited.Add(cur) {
+			return nil
+		}
+
+		ret := []Pos{}
+		if keepFn(cur) {
+			ret = append(ret, cur)
+		}
+
+		nbs := neighborFn(cur)
+		for _, nb := range nbs {
+			ret = append(ret, backtrack(nb)...)
+		}
+
+		return ret
+	}
+
+	found := backtrack(start)
+	return found
+}
+
 func (g *Grid[T]) Points() iter.Seq[Pos] {
 	return func(yield func(Pos) bool) {
 		for y, row := range g.points {
